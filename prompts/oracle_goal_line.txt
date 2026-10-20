@@ -1,0 +1,1 @@
+**Given goal point**: [{x:.3f}, {y:.3f}] (normalized image coordinates). This is the correct final position for this task and embodiment. Your trajectory must end exactly at this point.

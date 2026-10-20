@@ -1,0 +1,4 @@
+**Embodiment**: {embodiment}
+**Task**: {task}
+
+The image shows a first-person view from the embodiment's current position. Begin your trajectory near the bottom center of the image (around normalized coordinate [0.5, 0.95]) and predict the path forward as a list of 2D points in normalized coordinates (values from 0 to 1) according to the embodiment and the scenario shown in the image.

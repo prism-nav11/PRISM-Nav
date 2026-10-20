@@ -83,7 +83,7 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3 section-title">Abstract</h2>
         <div class="content has-text-justified">
-          <p>A frozen vision-language model (VLM) can draw a navigation trace over a first-person image for a task and an embodiment without task-specific training. However, a zero-shot method fails in one of two ways. Some models chain points without settling a destination, so the trace wanders from the task, which we call the <i>wandering trace</i>. Others reach an accurate trace only after long reasoning that a robot pays for in latency and price, which we call the <i>reasoning cost</i>. We present <b>PRISM-Nav</b>, a Procedural Reasoning Interface with Structured output for Model-agnostic zero-shot navigation trace generation, a decision harness that specifies what a frozen VLM decides and in what order within one call. A decision schema bounds the waypoints and asks for the goal before the path, a single-call procedure orders the remaining decisions, and a deterministic repair corrects the output. Ablations show that the schema recovers the accuracy and the order of the stages removes the reasoning. On API and open-weight backbones from four vendors, PRISM-Nav raises accuracy by up to 79 points on the benchmark score and 51 points at equal resolution and lowers latency by up to 58 percent on Gemini 3 Flash. A wheeled robot and a humanoid robot execute its traces.</p>
+          <p>A frozen vision-language model (VLM) can draw a navigation trace over a first-person image for a task and an embodiment without task-specific training. However, a zero-shot method fails in one of two ways. Some models chain points without settling a destination, so the trace wanders from the task, which we call the <i>wandering trace</i>. Others reach an accurate trace only after long reasoning that a robot pays for in latency and price, which we call the <i>reasoning cost</i>. We present <b>PRISM-Nav</b>, a Procedural Reasoning Interface with Structured output for Model-agnostic zero-shot navigation trace generation, a decision harness that specifies what a frozen VLM decides and in what order within one call. A decision schema bounds the waypoints and asks for the goal before the path, a single-call procedure orders the remaining decisions, and a deterministic repair corrects the output. Ablations show that the schema removes the wandering trace and that the order of the stages removes the reasoning cost. On API and open-weight models from four vendors, PRISM-Nav raises the NaviTrace benchmark score by up to 79 points, of which 51 remain when every trace is resampled to ten waypoints, and lowers latency by up to 58 percent on Gemini 3 Flash. A wheeled robot and a humanoid robot execute its traces.</p>
         </div>
       </div>
     </div>
@@ -156,7 +156,7 @@
         <thead>
           <tr>
             <th class="l" rowspan="2">Backbone</th><th rowspan="2">Reasoning</th>
-            <th colspan="3">Score &uarr;</th><th>Equal res. &uarr;</th>
+            <th colspan="3">Score &uarr;</th><th>S<sub>eq</sub> &uarr;</th>
             <th colspan="2">FDE &darr;</th><th colspan="2">Sem. penalty &darr;</th><th>Reasoning tokens</th>
           </tr>
           <tr>
@@ -194,7 +194,7 @@
         </tbody>
       </table>
     </div>
-    <p class="table-note">Validation split, one run per cell. &Delta; is the mean per-image difference of PRISM-Nav from NaviTrace, on the official score and with every trace and reference resampled to ten points (equal resolution). * marks p&nbsp;&lt;&nbsp;0.01 under a Wilcoxon signed-rank test, which every marked official difference also passes after a Bonferroni correction over the 24 rows. Reasoning tokens are per call.</p>
+    <p class="table-note">Validation split, one run per cell. &Delta; is the mean per-image difference of PRISM-Nav from NaviTrace, on the official score and with every trace and reference resampled to ten points (S<sub>eq</sub>, equal resolution). * marks p&nbsp;&lt;&nbsp;0.01 under a Wilcoxon signed-rank test, which every marked official difference also passes after a Bonferroni correction over the 24 rows. Reasoning tokens are per call.</p>
     <div class="content mt-4">
       <ul class="takeaways">
         <li>Every backbone whose baseline is below zero, and thus worse than a straight line through the image, is lifted above zero by 14 to 79 points.</li>
@@ -302,10 +302,10 @@
       <table class="table is-fullwidth results">
         <thead><tr><th class="l">Backbone</th><th class="l">Metric</th><th>None</th><th>2&ndash;4</th><th>3&ndash;5</th><th>4&ndash;6</th><th>6&ndash;8</th><th>6&ndash;12</th><th>6&ndash;16</th></tr></thead>
         <tbody>
-          <tr><td class="l">Gemini 3 Flash</td><td class="l">Official</td><td>52.40</td><td>55.94</td><td>56.11</td><td class="best">56.41</td><td>54.40</td><td>52.02</td><td>48.20</td></tr>
-          <tr><td class="l"></td><td class="l">Equal res.</td><td>60.43</td><td>61.29</td><td>61.09</td><td class="best">61.68</td><td>60.33</td><td>59.82</td><td>59.53</td></tr>
-          <tr><td class="l">GPT-5.4 nano</td><td class="l">Official</td><td>14.17</td><td>15.86</td><td>15.64</td><td class="best">17.42</td><td>16.66</td><td>15.24</td><td>13.62</td></tr>
-          <tr><td class="l"></td><td class="l">Equal res.</td><td>27.73</td><td>26.80</td><td>26.22</td><td>27.44</td><td class="best">27.85</td><td>27.68</td><td>27.57</td></tr>
+          <tr><td class="l">Gemini 3 Flash</td><td class="l">S</td><td>52.40</td><td>55.94</td><td>56.11</td><td class="best">56.41</td><td>54.40</td><td>52.02</td><td>48.20</td></tr>
+          <tr><td class="l"></td><td class="l">S<sub>eq</sub></td><td>60.43</td><td>61.29</td><td>61.09</td><td class="best">61.68</td><td>60.33</td><td>59.82</td><td>59.53</td></tr>
+          <tr><td class="l">GPT-5.4 nano</td><td class="l">S</td><td>14.17</td><td>15.86</td><td>15.64</td><td class="best">17.42</td><td>16.66</td><td>15.24</td><td>13.62</td></tr>
+          <tr><td class="l"></td><td class="l">S<sub>eq</sub></td><td>27.73</td><td>26.80</td><td>26.22</td><td>27.44</td><td class="best">27.85</td><td>27.68</td><td>27.57</td></tr>
         </tbody>
       </table>
     </div>

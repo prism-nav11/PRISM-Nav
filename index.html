@@ -57,9 +57,9 @@
       Check every frame for faces, signs, and other identifying details before adding it. -->
       <div class="columns is-vcentered">
         <div class="column is-7"><img class="fig-img" src="static/images/teaser_run.jpg" alt="A wheeled robot enters a parking lot. NaviTrace takes the exit lane, PRISM-Nav takes the entrance lane."></div>
-        <div class="column is-5"><img class="fig-img" src="static/images/tradeoff.png" alt="Validation score against latency per decision for NaviTrace and PRISM-Nav on four backbones."></div>
+        <div class="column is-5"><img class="fig-img" src="static/images/tradeoff.png" alt="Validation score against latency per decision for NaviTrace and PRISM-Nav on five backbones."></div>
       </div>
-      <p class="figure-caption"><b>(Left)</b> A wheeled robot is asked to enter the parking lot. NaviTrace enters through the exit lane, whereas PRISM-Nav reads the markings on the ground and enters through the entrance lane. <b>(Right)</b> Validation score against latency per decision on four backbones. Each arrow runs from NaviTrace to PRISM-Nav, which recovers the accuracy on the small models and removes the latency on the reasoning models.</p>
+      <p class="figure-caption"><b>(Left)</b> A wheeled robot is asked to enter the parking lot. NaviTrace enters through the exit lane, whereas PRISM-Nav reads the markings on the ground and enters through the entrance lane. <b>(Right)</b> Validation score against latency per decision on five backbones. Each arrow runs from NaviTrace to PRISM-Nav, which recovers the accuracy on the small models and removes the latency on the reasoning models.</p>
     </div>
   </div>
 </section>
@@ -314,6 +314,14 @@
     <h3 class="title is-4 section-title mt-5">Qualitative results</h3>
     <div class="fig-frame"><img class="fig-img" src="static/images/qualitative.jpg" alt="Reference traces, NaviTrace, and PRISM-Nav on five validation scenes."></div>
     <p class="figure-caption">Reference traces, NaviTrace, and PRISM-Nav on five validation scenes with Gemini 3 Flash. The NaviTrace trace leaves the trail or crosses the rail tracks, and PRISM-Nav follows the reference.</p>
+
+    <h3 class="title is-4 section-title mt-5">Implementation notes</h3>
+    <div class="content">
+      <ul class="takeaways">
+        <li><b>The executed goal is a check on the output.</b> Without the executed goal field, GPT-5.4 nano scores 17.05 against 17.42 for PRISM-Nav on the validation split (paired Wilcoxon <i>p</i> = 0.77), so the field does not change the score.</li>
+        <li><b>Serving of Gemini 3 Flash.</b> Gemini 3 Flash reasons at low effort only when Google Vertex serves the call, so its reasoning-on rows are served by Vertex and its reasoning-off rows by Google AI Studio.</li>
+      </ul>
+    </div>
   </div>
 </section>
 
